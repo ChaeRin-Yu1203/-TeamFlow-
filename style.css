@@ -1,0 +1,830 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f5f7fa;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #222;
+}
+
+/* 전역 타이포그래피 */
+h1 {
+    font-size: 28px;
+    line-height: 1.3;
+}
+
+h2 {
+    font-size: 22px;
+    line-height: 1.4;
+}
+
+h3 {
+    font-size: 18px;
+    line-height: 1.4;
+}
+
+/* 폼 요소 기본 크기 */
+input,
+select,
+textarea,
+button {
+    font-size: 14px;
+    font-family: inherit;
+}
+
+label,
+p {
+    font-size: 14px;
+}
+
+.app {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+@media (max-width: 768px) {
+    .app {
+        padding: 12px;
+    }
+}
+
+/* 데모 컨트롤 섹션 */
+.demo-control-section {
+    background: #fff3cd;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    border: 1px solid #ffc107;
+    box-shadow: 0 2px 4px rgba(255, 193, 7, 0.1);
+}
+
+.screen {
+    display: none;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.screen.active {
+    display: block;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 24px;
+}
+
+.section {
+    margin-bottom: 25px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    border: 1px solid #e0e0e0;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.section:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.section:last-child {
+    margin-bottom: 0;
+}
+
+.section h2 {
+    margin: 0 0 15px 0;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #007bff;
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* 섹션 설명 */
+.section-description {
+    color: #666;
+    font-size: 13px;
+    margin: -10px 0 20px 0;
+    line-height: 1.5;
+}
+
+/* 팀원 관리 섹션 내부 영역 구분 */
+.input-area {
+    margin-bottom: 25px;
+}
+
+.result-area {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+    font-size: 14px;
+}
+
+input, select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+input[type="text"], input[type="date"] {
+    width: 100%;
+}
+
+.form-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.form-row input, .form-row select {
+    flex: 1;
+    min-width: 120px;
+}
+
+button {
+    padding: 10px 16px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: #2563eb;
+}
+
+button:disabled {
+    background: #d1d5db;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.nav-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.nav-btn.secondary {
+    background: #6b7280;
+    margin-bottom: 20px;
+}
+
+.nav-btn.secondary:hover {
+    background: #4b5563;
+}
+
+#memberList, #timeline {
+    margin-top: 15px;
+}
+
+.member-item, .timeline-item {
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.timeline-item {
+    border-left: 3px solid #007bff;
+}
+
+.timeline-date {
+    color: #666;
+    font-size: 12px;
+}
+
+.timeline-type {
+    display: inline-block;
+    padding: 2px 8px;
+    background: #007bff;
+    color: white;
+    border-radius: 3px;
+    font-size: 11px;
+    margin-right: 8px;
+}
+
+#summaryStatus {
+    margin-bottom: 15px;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.status-badge.draft {
+    background: #ffc107;
+    color: #000;
+}
+
+.status-badge.approved {
+    background: #28a745;
+    color: white;
+}
+
+#summaryJSON {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    overflow-x: auto;
+    font-size: 13px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+#approveBtn {
+    background: #ffc107;
+    color: #000;
+    margin-right: 10px;
+}
+
+#approveBtn:hover:not(:disabled) {
+    background: #e0a800;
+}
+
+#pdfBtn {
+    background: #28a745;
+    transition: opacity 0.3s;
+}
+
+#pdfBtn:hover:not(:disabled) {
+    background: #218838;
+}
+
+/* 애니메이션 */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* 로그 폼 섹션 */
+.form-section {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.form-section:last-child {
+    border-bottom: none;
+}
+
+.form-section h3 {
+    font-size: 14px;
+    color: #333;
+    margin: 0 0 10px 0;
+    font-weight: 600;
+}
+
+textarea {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+    resize: vertical;
+}
+
+label {
+    font-size: 13px;
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    margin-right: 4px;
+}
+
+/* 참여자 카드 */
+.participant-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 8px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.participant-card select,
+.participant-card input {
+    flex: 1;
+    min-width: 100px;
+}
+
+.participant-card button {
+    background: #dc3545;
+    padding: 6px 10px;
+    font-size: 12px;
+}
+
+/* 기여도 점수 placeholder 스타일 */
+.participant-score:invalid {
+    color: #999;
+}
+
+.participant-score option {
+    color: #333;
+}
+
+/* 타임라인 - 요약 리스트 구조 */
+.timeline-row {
+    background: white;
+    border: 1px solid #f3f4f6;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.timeline-row:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-color: #e5e7eb;
+}
+
+.timeline-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    gap: 16px;
+}
+
+.timeline-summary-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.timeline-summary-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 6px;
+}
+
+.timeline-summary-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.meta-item {
+    font-size: 13px;
+    color: #9ca3af;
+}
+
+.meta-item::before {
+    content: '•';
+    margin-right: 8px;
+    color: #d1d5db;
+}
+
+.meta-item:first-child::before {
+    content: '';
+    margin-right: 0;
+}
+
+.timeline-summary-status {
+    flex-shrink: 0;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-badge.status-complete {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.status-badge.status-partial {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.status-badge.status-pending {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.timeline-detail-toggle {
+    width: 100%;
+    padding: 12px 16px;
+    background: #f9fafb;
+    border: none;
+    border-top: 1px solid #f3f4f6;
+    color: #3b82f6;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.2s;
+}
+
+.timeline-detail-toggle:hover {
+    background: #f3f4f6;
+}
+
+.timeline-detail-content {
+    display: none;
+    padding: 0;
+    border-top: 1px solid #f3f4f6;
+    background: #fafbfc;
+}
+
+.timeline-detail-content.show {
+    display: block;
+}
+
+.detail-section {
+    padding: 16px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.detail-section:last-child {
+    border-bottom: none;
+}
+
+/* 타임라인 상세보기 레이블 - 강조 */
+.timeline-detail-content .detail-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+}
+
+.timeline-detail-content .detail-label::before {
+    content: "• ";
+    color: #9ca3af;
+}
+
+/* 타임라인 상세보기 본문 */
+.timeline-detail-content .detail-value {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: #6b7280;
+}
+
+.participant-row {
+    padding: 10px 0;
+    border-bottom: 1px dashed #f3f4f6;
+}
+
+.participant-row:last-child {
+    border-bottom: none;
+}
+
+.participant-name {
+    font-weight: 600;
+    color: #111827;
+    margin-right: 12px;
+}
+
+.participant-role {
+    color: #6b7280;
+    margin-right: 12px;
+}
+
+.participant-score {
+    color: #3b82f6;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.participant-comment {
+    display: block;
+    margin-top: 6px;
+    color: #9ca3af;
+    font-size: 13px;
+    font-style: italic;
+    padding-left: 12px;
+    border-left: 2px solid #f3f4f6;
+}
+
+.evidence-button {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #3b82f6;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.evidence-button:hover {
+    background: #2563eb;
+}
+/* KPI 카드 스타일 */
+.kpi-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.kpi-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.kpi-value {
+    font-size: 32px;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 8px;
+}
+
+.kpi-label {
+    font-size: 14px;
+    color: #666;
+}
+
+/* 팀원별 활동 유형 도넛 차트 */
+.member-pie-card {
+    background: #f8f9fa;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.donut-chart {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    position: relative;
+}
+
+.donut-chart::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background: white;
+    border-radius: 50%;
+}
+
+/* 도넛 차트 범례 퍼센트 강조 */
+.pie-percent {
+    font-weight: 600;
+    color: #222;
+    font-size: 14px;
+}
+
+/* 팀원 목록 그리드 레이아웃 (웹 반응형) */
+.member-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+}
+
+.member-card {
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* PDF/인쇄 전용 스타일 - 2열 고정 */
+@media print {
+    .member-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px;
+    }
+    
+    .member-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        font-size: 11px;
+    }
+}
+
+/* 통일된 섹션 카드 스타일 */
+.section-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover 시 경계선 강조 */
+.section-card:hover {
+    border-color: #d1d5db;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* 활성 섹션 강조 */
+.section-card.is-active {
+    border-color: #3b82f6;
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.15);
+}
+
+.section-header {
+    padding: 16px;
+    background: #fff;
+    border-bottom: 1px solid #e5e7eb;
+    cursor: default;
+    position: relative;
+}
+
+.section-header[onclick] {
+    cursor: pointer;
+}
+
+.section-header[onclick]:hover {
+    background: #f9fafb;
+}
+
+/* 섹션 헤더 하단 강조 라인 */
+.section-header::after {
+    content: "";
+    display: block;
+    height: 2px;
+    margin-top: 10px;
+    background: #93c5fd;
+    border-radius: 999px;
+}
+
+/* ✅ 섹션 제목 통일 (크기 업 + 굵기 업) */
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.2px;
+    color: #111827;
+    line-height: 1.2;
+}
+
+/* ✅ 섹션 설명 통일 */
+.section-desc {
+    margin-top: 6px;
+    font-size: 13px;
+    color: #6b7280;
+    line-height: 1.4;
+}
+
+/* 토글 버튼 (제목 크기에 맞춰 균형 조정) */
+.section-toggle {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: #f9fafb;
+    font-size: 16px;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.section-toggle:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+}
+
+.section-body {
+    padding: 20px;
+}
+
+.section-body.is-collapsed {
+    display: none;
+}
+
+/* 타임라인 미리보기 */
+.section-preview {
+    padding: 12px 16px;
+    background: #f9fafb;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 13px;
+    color: #374151;
+}
+
+.section-preview.is-hidden {
+    display: none;
+}
+
+.preview-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 8px 0;
+    border-top: 1px solid #f3f4f6;
+}
+
+.preview-item:first-child {
+    border-top: none;
+}
+
+.preview-title {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #111827;
+    font-weight: 500;
+}
+
+.preview-meta {
+    color: #9ca3af;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+/* 익명 평가 미니 버튼 */
+.mini-btn {
+    padding: 8px 12px;
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    color: #374151;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.mini-btn:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+}
+
+.mini-btn.primary {
+    border-color: #3b82f6;
+    background: #3b82f6;
+    color: #fff;
+}
+
+.mini-btn.primary:hover {
+    background: #2563eb;
+    border-color: #1d4ed8;
+}

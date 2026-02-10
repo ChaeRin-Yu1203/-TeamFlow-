@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로젝트 협업 지원 시스템 (TeamFlow) </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Screen A: 프로젝트 대시보드 -->
+        <div id="screenA" class="screen active">
+            <h1>프로젝트 협업 지원 시스템 (TeamFlow)</h1>
+            
+            </div>
+            
+            <!-- 데모 컨트롤 -->
+            <div class="demo-control-section">
+                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                    <button onclick="loadDemoDataUI()" style="background: #17a2b8;"> 샘플 데이터 로드</button>
+                    <button onclick="clearAllDataUI()" style="background: #dc3545;"> 전체 초기화</button>
+                    <button onclick="saveToLocalStorage()" style="background: #28a745;"> 저장</button>
+                    <span style="color: #856404; font-size: 12px;">※ 샘플 데이터는 자동으로 로드되지 않습니다. 테스트를 원하시면 버튼을 클릭하세요.</span>
+                </div>
+            </div>
+            
+            <!-- 프로젝트 정보 -->
+            <div class="section-card" id="projectSection">
+                <div class="section-header">
+                    <div>
+                        <div class="section-title">프로젝트 정보</div>
+                        <div class="section-desc">프로젝트의 기본 정보를 입력하세요.</div>
+                    </div>
+                </div>
+                <div class="section-body">
+                    <label>프로젝트 이름</label>
+                    <input type="text" id="projectName" placeholder="프로젝트 이름을 입력하세요">
+                </div>
+            </div>
+
+            <!-- 팀원 관리 섹션 (아코디언) -->
+            <div class="section-card" id="memberSection">
+                <div class="section-header" onclick="toggleSection('member')">
+                    <div>
+                        <div class="section-title">
+                            <button type="button" class="section-toggle" id="toggleBtn-member" aria-expanded="true" onclick="event.stopPropagation(); toggleSection('member');">▲</button>
+                            팀원 관리
+                        </div>
+                        <div class="section-desc">팀원을 추가하고 역할을 추천받아 최종 역할을 확정하세요.</div>
+                    </div>
+                </div>
+                <div class="section-body" id="sectionBody-member">
+                    <!-- 팀원 입력 영역 -->
+                    <div class="input-area" style="padding-bottom:20px; border-bottom:1px solid #f3f4f6;">
+                        <p style="color: #6b7280; font-size: 13px; margin-bottom: 12px;">
+                            역할 추천을 위해 학과 및 역할 선호 정보를 입력해주세요. 최종 역할은 팀에서 결정합니다.
+                        </p>
+                        
+                        <div style="border: 1px solid #ddd; padding: 15px; border-radius: 4px; background: #f9f9f9; margin-bottom: 15px;">
+                            <div class="form-row" style="margin-bottom: 10px;">
+                                <input type="text" id="memberAlias" placeholder="이름 (필수)" required style="flex: 1;">
+                                <select id="memberMajorType" required style="flex: 1;">
+                                    <option value="">학과 선택 (필수)</option>
+                                    <option value="ENGINEERING">공학</option>
+                                    <option value="DESIGN">디자인</option>
+                                    <option value="ART">문예체능</option>
+                                    <option value="HUMANITIES">인문/사회</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-row" style="margin-bottom: 10px;">
+                                <select id="memberPreferred1" required style="flex: 1;">
+                                    <option value="">선호 역할 1순위 (필수)</option>
+                                    <option value="PL">기획/총괄</option>
+                                    <option value="DEV">개발</option>
+                                    <option value="DESIGN">디자인</option>
+                                    <option value="PRESENT">발표</option>
+                                    <option value="DOCS">문서</option>
+                                    <option value="DATA">데이터/분석</option>
+                                </select>
+                                <select id="memberPreferred2" style="flex: 1;">
+                                    <option value="">선호 역할 2순위 (선택)</option>
+                                    <option value="PL">기획/총괄</option>
+                                    <option value="DEV">개발</option>
+                                    <option value="DESIGN">디자인</option>
+                                    <option value="PRESENT">발표</option>
+                                    <option value="DOCS">문서</option>
+                                    <option value="DATA">데이터/분석</option>
+                                </select>
+                                <select id="memberPreferred3" style="flex: 1;">
+                                    <option value="">선호 역할 3순위 (선택)</option>
+                                    <option value="PL">기획/총괄</option>
+                                    <option value="DEV">개발</option>
+                                    <option value="DESIGN">디자인</option>
+                                    <option value="PRESENT">발표</option>
+                                    <option value="DOCS">문서</option>
+                                    <option value="DATA">데이터/분석</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-row" style="margin-bottom: 10px;">
+                                <select id="memberAvoidRole" style="flex: 1;">
+                                    <option value="">비선호 역할 (선택)</option>
+                                    <option value="PL">기획/총괄</option>
+                                    <option value="DEV">개발</option>
+                                    <option value="DESIGN">디자인</option>
+                                    <option value="PRESENT">발표</option>
+                                    <option value="DOCS">문서</option>
+                                    <option value="DATA">데이터/분석</option>
+                                </select>
+                            </div>
+                            
+                            <button onclick="addMember()" style="width: 100%;">팀원 추가</button>
+                        </div>
+                    </div>
+                    
+                    <!-- 결과 영역 -->
+                    <div class="result-area" style="padding-top:20px; border-top:1px solid #f3f4f6;">
+                        <!-- 역할 추천 버튼 -->
+                        <div style="margin-bottom: 15px;">
+                            <button id="toggleRoleBtn" onclick="toggleRoleRecommendations()" style="background: #0891b2; border:none; padding:10px 16px; font-weight:500;"> 역할 추천 보기</button>
+                            <span style="color: #9ca3af; font-size: 12px; margin-left: 10px;">※ 추천은 참고용이며, 최종 역할은 팀이 결정합니다.</span>
+                        </div>
+                        
+                        <!-- 역할 추천 결과 -->
+                        <div id="roleRecommendationResult" style="display: none; margin-bottom: 20px; padding: 16px; background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px;">
+                            <h3 style="margin-top: 0; color: #0369a1; font-size: 15px; font-weight:600;">역할 추천 결과</h3>
+                            <div id="roleRecommendationContent"></div>
+                        </div>
+                        
+                        <!-- 팀원 목록 -->
+                        <div style="padding-top:20px; border-top:1px solid #f3f4f6;">
+                            <h3 style="font-size: 14px; color: #374151; margin: 0 0 12px 0; font-weight: 600;">팀원 목록</h3>
+                            <div id="memberList"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 활동 로그 입력 -->
+            <div class="section-card" id="logInputSection">
+                <div class="section-header">
+                    <div>
+                        <div class="section-title">활동 로그 입력</div>
+                        <div class="section-desc">팀원들의 활동 내역을 기록하고 기여도를 관리하세요.</div>
+                    </div>
+                </div>
+                <div class="section-body">
+                    <button onclick="toggleLogForm()" id="toggleLogFormBtn" style="margin-bottom: 10px;">+ 새 활동 로그 추가</button>
+                    
+                    <div id="logFormContainer" style="display: none; border: 1px solid #ddd; padding: 15px; border-radius: 4px; background: #f9f9f9;">
+                    <form id="logForm" onsubmit="addLog(event)">
+                        
+                        <!-- 기본 정보 -->
+                        <div class="form-section">
+                            <h3>기본 정보</h3>
+                            <div class="form-row">
+                                <input type="text" id="logTitle" placeholder="활동 제목 (필수)" required style="flex: 2;">
+                                <input type="date" id="logDate" required>
+                            </div>
+                            
+                            <div class="form-row">
+                                <label style="min-width: 80px;">활동 유형 (1~2개):</label>
+                                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                    <label><input type="checkbox" name="logTypes" value="조사"> 조사</label>
+                                    <label><input type="checkbox" name="logTypes" value="구현(코딩)"> 구현(코딩)</label>
+                                    <label><input type="checkbox" name="logTypes" value="실험·테스트"> 실험·테스트</label>
+                                    <label><input type="checkbox" name="logTypes" value="문서·보고서"> 문서·보고서</label>
+                                    <label><input type="checkbox" name="logTypes" value="발표·발표자료"> 발표·발표자료</label>
+                                    <label><input type="checkbox" name="logTypes" value="회의·조율"> 회의·조율</label>
+                                    <label><input type="checkbox" name="logTypes" value="디자인"> 디자인</label>
+                                    <label><input type="checkbox" name="logTypes" value="기타"> 기타</label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <input type="time" id="logStartTime" placeholder="시작 시간">
+                                <span>~</span>
+                                <input type="time" id="logEndTime" placeholder="종료 시간">
+                                <span id="durationDisplay" style="color: #666; font-size: 12px;"></span>
+                            </div>
+                        </div>
+                        
+                        <!-- 관련 범위 -->
+                        <div class="form-section">
+                            <h3>관련 범위</h3>
+                            <div class="form-row">
+                                <input type="text" id="logTaskScope" placeholder="작업 항목">
+                                <select id="logOutputType">
+                                    <option value="">산출물 유형</option>
+                                    <option value="문서">문서</option>
+                                    <option value="코드">코드</option>
+                                    <option value="슬라이드">슬라이드</option>
+                                    <option value="이미지">이미지</option>
+                                    <option value="기타">기타</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- 참여자 정보 -->
+                        <div class="form-section">
+                            <h3>참여자 및 역할</h3>
+                            <div id="participantsContainer"></div>
+                            <button type="button" onclick="addParticipant()" style="background: #6c757d; font-size: 12px; padding: 6px 12px;">+ 참여자 추가</button>
+                        </div>
+                        
+                        <!-- 활동 내용 -->
+                        <div class="form-section">
+                            <h3>활동 내용</h3>
+                            <textarea id="logWhatIDid" placeholder="실제 수행 내용 (3~6줄, 필수)" rows="4" required style="width: 100%;"></textarea>
+                            <textarea id="logWhy" placeholder="목적/배경 (선택)" rows="2" style="width: 100%;"></textarea>
+                            <textarea id="logHow" placeholder="방법/도구 요약 (선택)" rows="2" style="width: 100%;"></textarea>
+                        </div>
+                        
+                        <!-- 결과 및 증빙 -->
+                        <div class="form-section">
+                            <h3>결과 및 증빙</h3>
+                            <div class="form-row">
+                                <select id="logStatus" required>
+                                    <option value="완료">완료</option>
+                                    <option value="부분완료">부분완료</option>
+                                    <option value="보류">보류</option>
+                                </select>
+                                <input type="text" id="logResultSummary" placeholder="결과 요약 (필수)" required style="flex: 2;">
+                            </div>
+                            <input type="text" id="logBeforeAfter" placeholder="변경점 (선택)" style="width: 100%; margin-top: 8px;">
+                            <input type="url" id="logEvidenceLink" placeholder="증빙 링크 (깃/노션/드라이브)" style="width: 100%; margin-top: 8px;">
+                        </div>
+                        
+                        <div style="display: flex; gap: 10px; margin-top: 15px;">
+                            <button type="submit" style="flex: 1;">로그 저장</button>
+                            <button type="button" onclick="toggleLogForm()" style="flex: 1; background: #6c757d;">취소</button>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+
+            <!-- 익명 평가 섹션 (아코디언) -->
+            <div class="section-card" id="feedbackSection">
+                <div class="section-header" onclick="toggleSection('feedback')">
+                    <div>
+                        <div class="section-title">
+                            <button type="button" class="section-toggle" id="toggleBtn-feedback" aria-expanded="false" onclick="event.stopPropagation(); toggleSection('feedback');">▼</button>
+                            익명 평가
+                        </div>
+                        <div class="section-desc">활동에 대한 익명 한줄 피드백을 남길 수 있어요.</div>
+                    </div>
+                </div>
+                
+                <!-- 접힘 상태 미리보기 (최근 2개) -->
+                <div class="section-preview" id="sectionPreview-feedback"></div>
+                
+                <div class="section-body is-collapsed" id="sectionBody-feedback">
+                    <!-- 입력 영역 - 2줄 레이아웃 -->
+                    <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:16px;">
+                        <!-- 첫 번째 줄: 활동 선택, 팀원 선택 -->
+                        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                            <select id="fbTargetLog" style="flex:1; min-width:200px; padding:10px 12px; border:1px solid #e5e7eb; border-radius:8px; font-size:14px; color:#374151;">
+                                <option value="">평가할 활동 선택</option>
+                            </select>
+                            
+                            <select id="fbTargetMember" disabled style="flex:1; min-width:160px; padding:10px 12px; border:1px solid #e5e7eb; border-radius:8px; font-size:14px; color:#374151;">
+                                <option value="">평가할 팀원 선택</option>
+                            </select>
+                        </div>
+                        
+                        <!-- 두 번째 줄: 텍스트 입력, 등록 버튼 -->
+                        <div style="display:flex; gap:10px; align-items:center;">
+                            <input id="fbText" type="text" placeholder="익명 한줄 평가 (5~60자)"
+                                style="flex:1; padding:10px 12px; border:1px solid #e5e7eb; border-radius:8px; font-size:14px; color:#374151;" />
+                            
+                            <button type="button" class="mini-btn primary" onclick="submitAnonymousFeedback()" style="padding:10px 20px; white-space:nowrap;">등록</button>
+                        </div>
+                    </div>
+                    
+                    <div style="font-size:12px; color:#9ca3af; margin-bottom:16px; padding:10px 12px; background:#f9fafb; border-radius:6px;">
+                        · 실명/비방/민감정보 입력 금지 · 욕설은 자동 마스킹 · 연속 제출 제한 있음
+                    </div>
+                    
+                    <!-- 리스트 토글 버튼 -->
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                        <div id="fbCountHint" style="font-size:13px; color:#6b7280;"></div>
+                        <button type="button" class="mini-btn secondary" onclick="toggleFeedbackListArea()" id="fbListToggleBtn">
+                            목록 보기
+                        </button>
+                    </div>
+                    
+                    <!-- 리스트 영역 (기본 숨김) -->
+                    <div id="feedbackListWrapper" style="display:none;">
+                        <div id="feedbackList"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 활동 타임라인 섹션 (아코디언 + 미리보기) -->
+            <div class="section-card" id="timelineSection">
+                <div class="section-header" onclick="toggleSection('timeline')">
+                    <div>
+                        <div class="section-title">
+                            <button type="button" class="section-toggle" id="toggleBtn-timeline" aria-expanded="false" onclick="event.stopPropagation(); toggleSection('timeline');">▼</button>
+                            활동 타임라인
+                        </div>
+                        <div class="section-desc">기록된 활동 로그를 시간순으로 확인하세요.</div>
+                    </div>
+                </div>
+                
+                <!-- 접힘 상태 미리보기 (최근 2개) -->
+                <div class="section-preview" id="sectionPreview-timeline"></div>
+                
+                <div class="section-body is-collapsed" id="sectionBody-timeline">
+                    <div id="timeline"></div>
+                </div>
+            </div>
+
+            <button class="nav-btn" onclick="goToSummary()">요약 & PDF 생성 →</button>
+        </div>
+
+        <!-- Screen B: 요약 & PDF -->
+        <div id="screenB" class="screen">
+            <h1></h1>
+            
+            <button class="nav-btn secondary" onclick="goToDashboard()">← 대시보드로</button>
+
+            <!-- 흐름 안내 -->
+            <div class="section" style="background: #f8f9fa; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
+                <p style="margin: 0; color: #666; font-size: 14px;">
+                    <strong>안내:</strong> 
+                    모든 팀원의 역할이 확정되어야 대시보드를 생성할 수 있습니다.
+                </p>
+            </div>
+
+            <div class="section">
+                <button id="generateSummary" onclick="generateSummary()">대시보드 생성</button>
+            </div>
+
+            <!-- 대시보드 컨테이너 -->
+            <div id="dashboardContainer" class="section">
+                <p style="color: #999; text-align: center; padding: 40px;">대시보드를 생성하려면 "대시보드 생성" 버튼을 클릭하세요.</p>
+            </div>
+
+            <!-- PDF 생성 영역 (항상 표시) -->
+            <div class="section">
+                <div id="summaryStatus" style="margin-bottom: 15px; padding: 12px; border-radius: 4px; background: #f8f9fa; color: #666; font-size: 14px;">
+                    PDF 생성 준비 중...
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button id="pdfBtn" onclick="generatePDF()" disabled style="flex: 1;">
+                         PDF 생성
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="state.js"></script>
+    <script src="summary-engine.js"></script>
+    <script src="role-recommendation-engine.js"></script>
+    <script src="demo-data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
