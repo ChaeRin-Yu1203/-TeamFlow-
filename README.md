@@ -3,6 +3,12 @@
 🔗 **서비스 바로가기 (GitHub Pages)**  
 👉 https://chaerin-yu1203.github.io/-TeamFlow-/
 
+🎬 **시연 영상**  
+👉[(https://www.youtube.com/watch?v=abc123XYZ)](https://youtu.be/Q-Im_a6xpVU)
+
+📑 **소개 PPT**  
+👉 [Presentation PDF 보기](./docs/presentation.pdf)
+
 > 팀 프로젝트에서 발생하는 기여도 불투명성 문제를 해결하기 위한  
 > **활동 로그 기반 기여도 관리 및 평가 리포트 생성 웹 시스템**
 
