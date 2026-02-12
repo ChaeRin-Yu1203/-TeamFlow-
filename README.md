@@ -7,7 +7,7 @@
 👉[(https://www.youtube.com/watch?v=abc123XYZ)](https://youtu.be/Q-Im_a6xpVU)
 
 📑 **소개 PPT**  
-👉 [Presentation PDF 보기](./docs/presentation.pdf)
+👉[ [Presentation PDF 보기](./docs/presentation.pdf)](https://github.com/ChaeRin-Yu1203/-TeamFlow-/blob/main/Teamflow.pdf)
 
 > 팀 프로젝트에서 발생하는 기여도 불투명성 문제를 해결하기 위한  
 > **활동 로그 기반 기여도 관리 및 평가 리포트 생성 웹 시스템**
@@ -115,8 +115,10 @@ PDF 생성 기능을 실행하면
 프로젝트 전반의 활동 내역과 개인별 기여도를 확인할 수 있는  
 **평가용 결과 보고서(PDF)** 가 생성된다.
 
- 데모 데이터는 시연 목적의 데이터이므로  
- 활동 상세 보기나 증빙 자료 열기 시 실제 외부 페이지가 출력되지 않을 수 있다.
+ -데모 데이터는 시연 목적의 데이터이므로  
+  활동 상세 보기나 증빙 자료 열기 시 실제 외부 페이지가 출력되지 않을 수 있다.
+ -테스트 및 시연이 끝난 후 또는 다른 테스트 데이터를 넣을 경우 
+  해당 웹페이지 상단에 있는 전체초기화를 눌러야 데이터 꼬임, 중복을 방지할 수 있다
 > ---
 
 ## ⚠️ 실행 중 발생할 수 있는 문제 해결
